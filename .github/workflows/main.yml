@@ -19,3 +19,11 @@ jobs:
       -  name: Executando Testes
          run: npx cypress run
       
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with: 
+          name: rlatorios
+          path: |
+            cypress/reports
+            cypress/screenshots
+            cypress/videos
