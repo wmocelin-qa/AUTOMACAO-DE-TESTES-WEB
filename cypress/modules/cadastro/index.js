@@ -8,9 +8,8 @@ export function preencherCadastroPreLogin() {
 }
 
 export function preencherFormularioCadastro() {
-    cy.get('#id_gender1').check()
+        cy.get('#id_gender1').check()
         cy.get('[data-qa="password"]').type(`12345`, {log: false})
-        // comboboxes ou selects usamos o comando select
         cy.get('#days').select('20')
         cy.get('#months').select('September')
         cy.get('select[data-qa="years"]').select('1998')
@@ -21,7 +20,6 @@ export function preencherFormularioCadastro() {
         cy.get('[data-qa="address2"]').type('Nº 10')
         cy.get('input[type="checkbox"]#newsletter').check()
         cy.get('input[type="checkbox"]#optin').check()
-
         cy.get('#country').select('Canada')
         cy.get('[data-qa="state"]').type('Alberta')
         cy.get('[data-qa="city"]').type('Calgary')
@@ -30,4 +28,29 @@ export function preencherFormularioCadastro() {
         cy.get('[data-qa="create-account"]').click()
 
             cy.url().should('includes', 'account_created')
+}
+
+export function preencherUsuarioSenhaCorretos () {
+        cy.get('[data-qa="login-email"]').type('qatester-1759531045838@test.com.br')
+        cy.get('[data-qa="login-password"]').type('12345')
+        cy.get('[data-qa="login-button"]').click()
+        cy.contains('Logged in as QA Tester Wesley').should('be.visible')
+}
+
+export function preencherUsuarioSenhaIncorretos () {
+        cy.get('[data-qa="login-email"]').type('qatester-1759531045838@test.com.br')
+        cy.get('[data-qa="login-password"]').type('1234d5')
+        cy.get('[data-qa="login-button"]').click()
+        cy.contains('Your email or password is incorrect').should('be.visible')
+}
+
+export function fazerLogoutUsuario () {
+        efetuarLogout()
+}
+
+export function realizarCadastroComDadosExistentes () {
+        cy.get('[data-qa="signup-name"]').type('QA Tester Wesley')
+        cy.get('[data-qa="signup-email"]').type(`qatester-1759531045838@test.com.br`)
+        cy.contains('button', 'Signup').click()
+        cy.contains('Email Address already exist!').should('be.visible')
 }
