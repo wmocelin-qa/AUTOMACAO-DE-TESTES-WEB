@@ -44,10 +44,6 @@ export function preencherUsuarioSenhaIncorretos () {
         cy.contains('Your email or password is incorrect').should('be.visible')
 }
 
-export function fazerLogoutUsuario () {
-        efetuarLogout()
-}
-
 export function realizarCadastroComDadosExistentes () {
         cy.get('[data-qa="signup-name"]').type('QA Tester Wesley')
         cy.get('[data-qa="signup-email"]').type(`qatester-1759531045838@test.com.br`)

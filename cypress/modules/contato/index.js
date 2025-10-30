@@ -8,3 +8,12 @@ export function realizarEnvioFormContato () {
       cy.get('[data-qa="submit-button"]').click()
       cy.contains('Success! Your details have been submitted successfully.').should('be.visible')
 }
+
+export function verificarAssinatura () {
+      cy.url().should('contain', 'https://automationexercise.com/')
+      cy.contains('.single-widget', 'Subscription')
+      cy.get('#susbscribe_email').type('joaosilvacostapinto@teste.com.br')
+      cy.get('#subscribe').click()
+      cy.get('.alert-success').should('be.visible')
+      .and('contain', 'You have been successfully subscribed!')
+}

@@ -1,6 +1,6 @@
 import { getTimeStamp, getRandomEmail, getRandomNumber } from '../support/helpers.js'
 import { faker } from '@faker-js/faker';
-import menu from '../modules/login/index.js'; 
+import menu from '../modules/menu/index.js'; 
 import { preencherCadastroPreLogin, preencherFormularioCadastro  } from '../modules/cadastro/index.js';
 import 'cypress-mochawesome-reporter/register';
 import 'cypress-xpath';
