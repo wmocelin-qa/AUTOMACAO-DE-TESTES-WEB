@@ -1,10 +1,11 @@
 /// <reference types="cypress" />
 
 import menu from '../modules/menu/index.js'; 
-import { preencherCadastroPreLogin, preencherFormularioCadastro, realizarCadastroComDadosExistentes } from '../modules/cadastro/index.js';
+import { preencherCadastroPreLogin, preencherFormularioCadastro, realizarCadastroComDadosExistentes, deletarConta } from '../modules/cadastro/index.js';
 import { realizarEnvioFormContato, verificarAssinatura } from '../modules/contato/index.js'
 import { loginUsuarioSenhaCorreto, loginUsuarioSenhaIncorreto, realizarLogoutUsuario } from '../modules/login/index.js'
 import { verificarProdutosEDetalhes, pesquisarProduto } from '../modules/produtos/index.js'
+import { incluirProdutosCarrinho } from '../modules/carrinho/index.js'
 import 'cypress-mochawesome-reporter/register';
  
 /* 
@@ -15,7 +16,7 @@ after -> 1x depois de todos os testes
 afterEach -> depois de cada teste
 */
 
-describe('Automation Exercise', () => {
+describe.only('Automation Exercise', () => {
 
     beforeEach(() => {
         cy.viewport('iphone-xr');
@@ -24,12 +25,12 @@ describe('Automation Exercise', () => {
 
     describe('Testes de Login, Registro e Logout', () => {
         beforeEach(() => {
-            menu.navegarParaLogin();
+            menu.navegarParaLogin()
         });
 
         it('Registrar usuário com sucesso', () => {
-            preencherCadastroPreLogin();
-            preencherFormularioCadastro();
+            preencherCadastroPreLogin()
+            preencherFormularioCadastro()
         });
 
         it('Login de Usuário com e-mail e senha corretos', () => {
@@ -37,16 +38,24 @@ describe('Automation Exercise', () => {
         });
 
         it('Login de Usuário com e-mail e senha incorretos', () => {
-            loginUsuarioSenhaIncorreto();
+            loginUsuarioSenhaIncorreto()
         });
 
         it('Logout de usuário', () => {
-            realizarLogoutUsuario();
+            loginUsuarioSenhaCorreto()
+            realizarLogoutUsuario()
         });
 
         it('Cadastrar um usuário existente', () => {
             realizarCadastroComDadosExistentes();
         });
+
+        it('Logar com usuário válido e realizar uma compra', () => {
+            preencherCadastroPreLogin()
+            preencherFormularioCadastro()
+            incluirProdutosCarrinho()
+            deletarConta()
+        })
     });
 
     describe('Testes sem acesso a login', () => {

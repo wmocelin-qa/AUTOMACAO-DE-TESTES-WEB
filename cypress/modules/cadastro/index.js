@@ -14,7 +14,7 @@ export function preencherFormularioCadastro() {
         cy.get('#months').select('September')
         cy.get('select[data-qa="years"]').select('1998')
         cy.get('[data-qa="first_name"]').type('QA')
-        cy.get('[data-qa="last_name"]').type(`${getRandomNumber()}`)
+        cy.get('[data-qa="last_name"]').type(`Tester`)
         cy.get('[data-qa="company"]').type('PGATS')
         cy.get('[data-qa="address"]').type('First Avenue')
         cy.get('[data-qa="address2"]').type('Nº 10')
@@ -23,30 +23,23 @@ export function preencherFormularioCadastro() {
         cy.get('#country').select('Canada')
         cy.get('[data-qa="state"]').type('Alberta')
         cy.get('[data-qa="city"]').type('Calgary')
-        cy.get('[data-qa="zipcode"]').type('894594622')
+        cy.get('[data-qa="zipcode"]').type('88133260')
         cy.get('[data-qa="mobile_number"]').type('48919481245433')
         cy.get('[data-qa="create-account"]').click()
 
             cy.url().should('includes', 'account_created')
+            cy.get('[data-qa="continue-button"]').click()
+            cy.contains('a', 'Logged in as ')
 }
 
-export function preencherUsuarioSenhaCorretos () {
-        cy.get('[data-qa="login-email"]').type('qatester-1759531045838@test.com.br')
-        cy.get('[data-qa="login-password"]').type('12345')
-        cy.get('[data-qa="login-button"]').click()
-        cy.contains('Logged in as QA Tester Wesley').should('be.visible')
-}
-
-export function preencherUsuarioSenhaIncorretos () {
-        cy.get('[data-qa="login-email"]').type('qatester-1759531045838@test.com.br')
-        cy.get('[data-qa="login-password"]').type('1234d5')
-        cy.get('[data-qa="login-button"]').click()
-        cy.contains('Your email or password is incorrect').should('be.visible')
+export function deletarConta () {
+        cy.get('a[href="/delete_account"]').click()
+        cy.url().should('contain', '/delete_account')
 }
 
 export function realizarCadastroComDadosExistentes () {
         cy.get('[data-qa="signup-name"]').type('QA Tester Wesley')
-        cy.get('[data-qa="signup-email"]').type(`qatester-1759531045838@test.com.br`)
+        cy.get('[data-qa="signup-email"]').type(`Lavinia-dd9@test.com.br`)
         cy.contains('button', 'Signup').click()
         cy.contains('Email Address already exist!').should('be.visible')
 }
