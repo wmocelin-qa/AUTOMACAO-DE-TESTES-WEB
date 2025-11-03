@@ -25,3 +25,4 @@ export function pesquisarProduto () {
     cy.contains('h2', 'Searched Products').should('be.visible')
     cy.contains('.product-image-wrapper', 'Winter Top').should('be.visible')
 }
+
